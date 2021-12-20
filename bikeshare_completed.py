@@ -33,19 +33,17 @@ def get_filters():
                 break
             except:
                 print('Enter a valid {} name'.format(index))
-    city, month, day= data_value                  
+    city, month, day= data_value
     print('-'*40)
     return city, month, day
 def filters(month_value, day_value):
-    if month_value =='none' and day_value != 'none':
-        value= 'day'
-    elif month_value != 'none' and day_value == 'none':
-        value= 'month'
-    elif month_value != 'none' and day_value != 'none':
-        value = 'both'
-    else:
-        value= 'no filter'
-    return value
+    if day_value !='none':
+        value = 'both' if month_value !='none' else 'day'
+    elif day_value =='none':
+        value = 'no filter' if month_value =='none' else 'month'
+    return value 
+
+
 
 def load_data(city, month, day):
     """
@@ -75,11 +73,11 @@ def load_data(city, month, day):
 
 
 def time_stats(df, filter_value):
-   
+
     """Displays statistics on the most frequent times of travel.
        Displays:
        Most common month, day and Hour.
-    
+
     """
     print('\nCalculating The Most Frequent Times of Travel...\n')
     list1= ['month', 'day', 'hour']
@@ -152,7 +150,7 @@ def user_stats(df, filter_value):
         value = df[i].value_counts()
         print(' Value count for {}: {}, filter: {}'.format(i,value,filter_value))
         print("This took %s seconds.\n" % (time.time() - start_time))
-   
+
     start_time = time.time()
     earliest = df['Birth Year'].min()
     most_recent = df['Birth Year'].max()
@@ -169,11 +167,11 @@ def main():
         filter_value= filters(month,day)
         time_stats(df,filter_value )
         station_stats(df, filter_value)
-        
+
         trip_duration_stats(df, filter_value)
         if city in ['chicago', 'new_york_city']:
             user_stats(df, filter_value)
-        
+
         start_index=0
         end_index=5
         data_view= input('\nWould you like to see raw data? Enter yes or no.\n').lower()
