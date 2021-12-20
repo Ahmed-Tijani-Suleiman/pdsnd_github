@@ -41,7 +41,7 @@ def filters(month_value, day_value):
         value = 'both' if month_value !='none' else 'day'
     elif day_value =='none':
         value = 'no filter' if month_value =='none' else 'month'
-    return value 
+    return value
 
 
 
@@ -80,8 +80,8 @@ def time_stats(df, filter_value):
 
     """
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    list1= ['month', 'day', 'hour']
-    for i in list1:
+    list= ['month', 'day', 'hour']
+    for i in list:
         start_time = time.time()
         value= df[i].mode()[0]
         count = (df[i] == df[i].mode()[0]).sum()
@@ -98,8 +98,8 @@ def station_stats(df, filter_value):
        most frequent combination of start station and end station trip
     """
     print('Calculating The Most Popular Stations and Trip...\n')
-    list2 = ['Start Station', 'End Station']
-    for i in list2:
+    list = ['Start Station', 'End Station']
+    for i in list:
         start_time = time.time()
         value = df[i].mode()[0]
         count = (df[i] == df[i].mode()[0]).sum()
@@ -142,8 +142,8 @@ def user_stats(df, filter_value):
         earliest, most recent, and most common year of birth
     """
     print('\nCalculating User Stats...\n')
-    list3= ['User Type', 'Gender']
-    for i in list3:
+    list= ['User Type', 'Gender']
+    for i in list:
         start_time = time.time()
         value = df[i].value_counts()
         print(' Value count for {}: {}, filter: {}'.format(i,value,filter_value))
