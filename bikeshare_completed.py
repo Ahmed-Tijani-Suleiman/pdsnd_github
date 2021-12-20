@@ -37,15 +37,13 @@ def get_filters():
     print('-'*40)
     return city, month, day
 def filters(month_value, day_value):
-    if month_value =='none' and day_value != 'none':
-        value= 'day'
-    elif month_value != 'none' and day_value == 'none':
-        value= 'month'
-    elif month_value != 'none' and day_value != 'none':
-        value = 'both'
-    else:
-        value= 'no filter'
-    return value
+    if day_value !='none':
+        value = 'both' if month_value !='none' else 'day'
+    elif day_value =='none':
+        value = 'no filter' if month_value =='none' else 'month'
+    return value 
+
+
 
 def load_data(city, month, day):
     """
